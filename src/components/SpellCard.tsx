@@ -1,0 +1,56 @@
+import React, { FunctionComponent, useState } from 'react';
+import { Spell } from './interfaces';
+import styled from 'styled-components';
+import SpellTypeBadge from './SpellTypeBadge';
+
+interface SpellCardProps {
+  spell: Spell;
+}
+
+interface SpellCardContainerProps {
+  selected: boolean;
+}
+
+const SpellCardContainer = styled.div<SpellCardContainerProps>`
+  display: flex;
+  flex-direction: column;
+  max-width: 17em;
+  margin-bottom: 1em;
+  border-radius: 0.25em;
+  padding: 1em;
+  background-color: ${props => (props.selected ? '#e3e3e4' : 'transparent')};
+  -webkit-box-shadow: 0.05em 0.05em 0.25em 0em rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0.05em 0.05em 0.25em 0em rgba(0, 0, 0, 0.75);
+  box-shadow: 0.05em 0.05em 0.25em 0em rgba(0, 0, 0, 0.75);
+`;
+
+interface RowProps {
+  multiple?: boolean;
+}
+
+const Row = styled.div<RowProps>`
+  display: flex;
+  flex-direction: row;
+  justify-content: ${props =>
+    props.multiple ? 'space-between' : 'flex-start'};
+  align-items: baseline;
+`;
+
+const SpellCard: FunctionComponent<SpellCardProps> = ({ spell }) => {
+  const [selected, setSelected] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setSelected(!selected);
+  };
+  return (
+    <SpellCardContainer selected={selected} onClick={handleClick}>
+      <Row multiple>
+        <h1> {spell.spell}</h1>
+        <SpellTypeBadge type={spell.type} />
+      </Row>
+      <p>{spell.effect}</p>
+    </SpellCardContainer>
+  );
+};
+
+export default SpellCard;
