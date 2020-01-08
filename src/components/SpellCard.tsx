@@ -2,7 +2,11 @@ import React, { FunctionComponent, useState } from 'react';
 import { Spell } from './interfaces';
 import styled from 'styled-components';
 import SpellTypeBadge from './SpellTypeBadge';
-import { boxShadow, selectedCardColor } from './themeColors';
+import {
+  boxShadow,
+  selectedCardColor,
+  cardBackgroundColor,
+} from './themeColors';
 
 interface SpellCardProps {
   spell: Spell;
@@ -20,10 +24,10 @@ const SpellCardContainer = styled.div<SpellCardContainerProps>`
   border-radius: 0.25em;
   padding: 1em;
   background-color: ${props =>
-    props.selected ? selectedCardColor : 'transparent'};
-  -webkit-box-shadow: 0.05em 0.05em 0.25em 0em ${boxShadow};
-  -moz-box-shadow: 0.05em 0.05em 0.25em 0em ${boxShadow};
-  box-shadow: 0.05em 0.05em 0.25em 0em ${boxShadow};
+    props.selected ? selectedCardColor : cardBackgroundColor};
+  -webkit-box-shadow: ${boxShadow};
+  -moz-box-shadow: ${boxShadow};
+  box-shadow: ${boxShadow};
 `;
 
 interface RowProps {
