@@ -1,18 +1,26 @@
 import React, { FunctionComponent } from 'react';
 import { SpellType } from './interfaces';
 import styled from 'styled-components';
+import {
+  charmColor,
+  enchantmentColor,
+  spellColor,
+  hexColor,
+  curseColor,
+  jinxColor,
+} from './themeColors';
 
 interface SpellTypeBadgeProps {
   type: SpellType;
 }
 
 const typeColors = {
-  Charm: '#BDA0BC',
-  Enchantment: '#B19994',
-  Spell: '#916ECE',
-  Hex: '#C1F7DC',
-  Curse: '#868694',
-  Jinx: '#C3D2D5',
+  Charm: charmColor,
+  Enchantment: enchantmentColor,
+  Spell: spellColor,
+  Hex: hexColor,
+  Curse: curseColor,
+  Jinx: jinxColor,
 };
 
 const SpellTypeWrapper = styled.div<SpellTypeBadgeProps>`
