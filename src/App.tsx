@@ -1,38 +1,23 @@
-import React, { FunctionComponent } from 'react';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { RestLink } from 'apollo-link-rest';
-import { ApolloProvider } from '@apollo/react-hooks';
+import React, { FunctionComponent, useState } from 'react';
 import Spells from './components/Spells';
-import { createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import Header from './components/Header';
-
-const GlobalStyles = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Lato|Gourgette&display=swap');
-  body {
-    font-family: 'Lato', sans-serif;
-  }
-  h1 {
-    font-family: 'Gourgette', cursive;
-  }
-`;
-
-const restLink = new RestLink({
-  uri: 'https://www.potterapi.com/v1/',
-});
-
-const client = new ApolloClient({
-  link: restLink,
-  cache: new InMemoryCache(),
-});
+import { ThemeType } from './components/interfaces';
+import { GlobalStyles } from './components/GlobalStyles';
 
 const App: FunctionComponent = () => {
+  const [theme, setTheme] = useState<ThemeType>('light');
+  const handleThemeChange = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
   return (
-    <ApolloProvider client={client}>
-      <GlobalStyles />
-      <Header />
-      <Spells />
-    </ApolloProvider>
+    <ThemeProvider theme={{ mode: theme }}>
+      <>
+        <GlobalStyles />
+        <Header toggleTheme={handleThemeChange} theme={theme} />
+        <Spells />
+      </>
+    </ThemeProvider>
   );
 };
 
