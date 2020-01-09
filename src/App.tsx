@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import Header from './components/Header';
 import { ThemeType } from './components/interfaces';
 import { GlobalStyles } from './components/GlobalStyles';
+import BottomBar from './components/BottomBar';
 
 const App: FunctionComponent = () => {
   const [theme, setTheme] = useState<ThemeType>('light');
@@ -16,6 +17,7 @@ const App: FunctionComponent = () => {
         <GlobalStyles />
         <Header toggleTheme={handleThemeChange} theme={theme} />
         <Spells />
+        <BottomBar />
       </>
     </ThemeProvider>
   );
