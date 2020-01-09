@@ -11,4 +11,8 @@ export const GlobalStyles = createGlobalStyle`
   h1 {
     font-family: 'Gourgette', cursive;
   }
+
+  button {
+    font-family: 'Lato', sans-serif;
+  }
 `;
