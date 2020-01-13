@@ -1,13 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
 import {
   cardBackgroundColor,
   boxShadow,
   textColor,
   spellColor,
-} from './themeColors';
+} from '../themeColors';
 
-const StyledBottomBar = styled.footer`
+export const StyledBottomBar = styled.footer`
   background-color: ${cardBackgroundColor};
   display: flex;
   flex-direction: row;
@@ -22,7 +21,7 @@ const StyledBottomBar = styled.footer`
   box-shadow: ${boxShadow};
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   border: 0.1em solid ${spellColor};
   color: ${textColor}
   background-color: ${cardBackgroundColor};
@@ -39,12 +38,3 @@ const Button = styled.button`
   &:hover {
   }
 `;
-
-const BottomBar = () => (
-  <StyledBottomBar>
-    <span></span>
-    <Button>Select</Button>
-  </StyledBottomBar>
-);
-
-export default BottomBar;

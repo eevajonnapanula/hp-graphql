@@ -1,8 +1,21 @@
-import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { ThemeType } from './interfaces';
+import { boxShadow, cardBackgroundColor } from '../themeColors';
 
-const Checkbox = styled.input.attrs(props => ({
+export const StyledHeader = styled.header`
+  display: flex;
+  flex-direction: row;
+  background-color: ${cardBackgroundColor}
+  justify-content: space-between;
+  align-items: center;
+  -webkit-box-shadow: ${boxShadow};
+  -moz-box-shadow: ${boxShadow};
+  box-shadow: ${boxShadow};
+  padding: 0.25em;
+  padding-left: 1em;
+  padding-right: 1em;
+`;
+
+export const Checkbox = styled.input.attrs(props => ({
   type: 'checkbox',
 }))`
   opacity: 0;
@@ -37,7 +50,7 @@ const Checkbox = styled.input.attrs(props => ({
   }
 `;
 
-const Slider = styled.span`
+export const Slider = styled.span`
   position: relative;
   width: 2.5em;
   height: 1.1em;
@@ -61,7 +74,7 @@ const Slider = styled.span`
   }
 `;
 
-const Detail = styled.span`
+export const Detail = styled.span`
   position: absolute;
   background-color: #e8cda5;
   z-index: 2;
@@ -104,24 +117,3 @@ const Detail = styled.span`
     content: '';
   }
 `;
-
-interface DarkModeSwitchProps {
-  handleClick: () => void;
-  theme: ThemeType;
-}
-
-const DarkModeSwitch: FunctionComponent<DarkModeSwitchProps> = ({
-  handleClick,
-  theme,
-}) => {
-  return (
-    <>
-      <Checkbox checked={theme === 'dark'} name="checkbox" />
-      <Slider className="slider" onClick={handleClick}>
-        <Detail className="detail" />
-      </Slider>
-    </>
-  );
-};
-
-export default DarkModeSwitch;

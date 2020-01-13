@@ -1,21 +1,19 @@
-import React, { FunctionComponent, useState } from 'react';
-import Spells from './components/Spells';
+import React, { FunctionComponent } from 'react';
+import Spells from './components/Spells/Spells';
 import { ThemeProvider } from 'styled-components';
-import Header from './components/Header';
-import { ThemeType } from './components/interfaces';
+import Header from './components/Header/Header';
 import { GlobalStyles } from './components/GlobalStyles';
-import BottomBar from './components/BottomBar';
+import BottomBar from './components/BottomBar/BottomBar';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_THEME } from './components/queries';
 
 const App: FunctionComponent = () => {
-  const [theme, setTheme] = useState<ThemeType>('light');
-  const handleThemeChange = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+  const { data } = useQuery(GET_THEME);
   return (
-    <ThemeProvider theme={{ mode: theme }}>
+    <ThemeProvider theme={{ mode: data.theme.mode }}>
       <>
         <GlobalStyles />
-        <Header toggleTheme={handleThemeChange} theme={theme} />
+        <Header />
         <Spells />
         <BottomBar />
       </>
