@@ -8,9 +8,11 @@ import styled from 'styled-components';
 const query = gql`
   query spell($path: String) {
     spells @rest(type: "Spell", path: $path) {
+      id
       spell
       type
       effect
+      isSelected @client
     }
   }
 `;
@@ -39,7 +41,7 @@ const Spells = () => {
   return (
     <SpellsWrapper>
       {spells.map(spell => (
-        <SpellCard key={spell.spell} spell={spell} />
+        <SpellCard key={spell.id} spell={spell} />
       ))}
     </SpellsWrapper>
   );

@@ -9,7 +9,9 @@ export type SpellType =
 export type ThemeType = 'dark' | 'light';
 
 export interface Spell {
+  id: string;
   spell: string;
   type: SpellType;
   effect: string;
+  isSelected: boolean;
 }

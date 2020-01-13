@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Spell } from './interfaces';
 import styled from 'styled-components';
 import SpellTypeBadge from './SpellTypeBadge';
@@ -7,6 +7,8 @@ import {
   selectedCardColor,
   cardBackgroundColor,
 } from './themeColors';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/react-hooks';
 
 interface SpellCardProps {
   spell: Spell;
@@ -42,14 +44,22 @@ const Row = styled.div<RowProps>`
   align-items: baseline;
 `;
 
-const SpellCard: FunctionComponent<SpellCardProps> = ({ spell }) => {
-  const [selected, setSelected] = useState<boolean>(false);
+const TOGGLE_SELECTED = gql`
+  mutation toggleSelected($id: ID) {
+    setSpellSelect(id: $id) @client {
+      id
+    }
+  }
+`;
 
-  const handleClick = () => {
-    setSelected(!selected);
+const SpellCard: FunctionComponent<SpellCardProps> = ({ spell }) => {
+  const [toggleSelect] = useMutation(TOGGLE_SELECTED);
+  const handleClick = async () => {
+    await toggleSelect({ variables: { id: spell.id } });
   };
+
   return (
-    <SpellCardContainer selected={selected} onClick={handleClick}>
+    <SpellCardContainer selected={spell.isSelected} onClick={handleClick}>
       <Row multiple>
         <h1> {spell.spell}</h1>
         <SpellTypeBadge type={spell.type} />
