@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { SpellType } from './interfaces';
+import { SpellType } from '../interfaces';
 import styled from 'styled-components';
 import {
   charmColor,
@@ -8,7 +8,7 @@ import {
   hexColor,
   curseColor,
   jinxColor,
-} from './themeColors';
+} from '../themeColors';
 
 interface SpellTypeBadgeProps {
   type: SpellType;

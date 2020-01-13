@@ -22,9 +22,16 @@ const restLink = new RestLink({
   fieldNameNormalizer: (key: string) => normalizeId(key),
 });
 
+const cache = new InMemoryCache();
+cache.writeData({
+  data: {
+    theme: { mode: 'light', __typename: 'Theme' },
+  },
+});
+
 const client = new ApolloClient({
   link: restLink,
-  cache: new InMemoryCache(),
+  cache,
   resolvers,
   typeDefs,
 });

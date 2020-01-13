@@ -1,6 +1,7 @@
 import { Spell } from '../components/interfaces';
 import { Context } from '@apollo/react-common';
 import gql from 'graphql-tag';
+import { GET_THEME } from '../components/queries';
 
 const SpellResolver = {
   isSelected: (spell: Spell) =>
@@ -21,6 +22,20 @@ const Mutation = {
     const data = { ...spell, isSelected: !spell.isSelected };
 
     cache.writeData({ id, data });
+  },
+  setTheme: (_: any, __: any, { cache }: Context) => {
+    const query = GET_THEME;
+    const prev = cache.readQuery({ query });
+
+    const data = {
+      ...prev,
+      theme: {
+        ...prev.theme,
+        mode: prev.theme.mode === 'light' ? 'dark' : 'light',
+      },
+    };
+
+    cache.writeData({ query, data });
   },
 };
 
