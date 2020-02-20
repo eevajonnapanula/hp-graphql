@@ -1,4 +1,4 @@
-import { Spell } from '../components/interfaces';
+import { Spell, SetSpellSelectArgs } from '../components/interfaces';
 import { Context } from '@apollo/react-common';
 import gql from 'graphql-tag';
 import { GET_THEME } from '../components/queries';
@@ -9,8 +9,9 @@ const SpellResolver = {
 };
 
 const Mutation = {
-  setSpellSelect: (_: any, args: any, { cache, getCacheKey }: Context) => {
+  setSpellSelect: (_: [], args: SetSpellSelectArgs, { cache, getCacheKey }: Context) => {
     const id = getCacheKey({ __typename: 'Spell', id: args.id });
+
     const fragment = gql`
       fragment SpellSelected on Spell {
         isSelected @client
@@ -23,7 +24,7 @@ const Mutation = {
 
     cache.writeData({ id, data });
   },
-  setTheme: (_: any, __: any, { cache }: Context) => {
+  setTheme: (_: [], __: [], { cache }: Context) => {
     const query = GET_THEME;
     const prev = cache.readQuery({ query });
 

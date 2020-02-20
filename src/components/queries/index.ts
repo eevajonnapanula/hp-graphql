@@ -9,16 +9,16 @@ export const GET_THEME = gql`
   }
 `;
 
-export const TOGGLE_SELECTED = gql`
-  mutation toggleSelected($theme: String) {
-    setTheme(theme: $theme) @client {
+export const TOGGLE_THEME = gql`
+  mutation setTheme {
+    setTheme @client {
       theme
     }
   }
 `;
 
 export const TOGGLE_SPELL_SELECT = gql`
-  mutation toggleSelected($id: ID) {
+  mutation toggleSpellSelect($id: ID) {
     setSpellSelect(id: $id) @client {
       id
     }
@@ -26,7 +26,7 @@ export const TOGGLE_SPELL_SELECT = gql`
 `;
 
 export const GET_SPELLS = gql`
-  query spell($path: String) {
+  query spells($path: String) {
     spells @rest(type: "Spell", path: $path) {
       id
       spell
