@@ -15,3 +15,7 @@ export interface Spell {
   effect: string;
   isSelected: boolean;
 }
+
+export interface SetSpellSelectArgs {
+  id: string;
+}

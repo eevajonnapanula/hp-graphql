@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_THEME, TOGGLE_SELECTED } from '../queries';
+import { GET_THEME, TOGGLE_THEME } from '../queries';
 import { Checkbox, Detail, Slider } from './styles';
 
 const DarkModeSwitch: FunctionComponent = () => {
   const { data } = useQuery(GET_THEME);
-  const [toggleTheme] = useMutation(TOGGLE_SELECTED);
+  const [toggleTheme] = useMutation(TOGGLE_THEME);
   const handleClick = () => {
     toggleTheme();
   };
